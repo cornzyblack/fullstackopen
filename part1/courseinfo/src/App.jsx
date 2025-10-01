@@ -1,30 +1,23 @@
 // Header, Content, and Total
 const Header = (props) => {
-  console.log(`Header: ${props}`)
   return (
     <h1>{props.course}</h1>
   );
 };
 
+const Part = (props) => (<p>{props.name} {props.noExcercises}</p>);
+
 const Content = (props) => {
-  console.log(`Content: ${props}`)
   return (
   <div>
-    <p>
-      <p>{props.parts[0].name} {props.parts[0].noExcercises}</p>
-    </p>
-    <p>
-      <p>{props.parts[1].name} {props.parts[1].noExcercises}</p>
-    </p>
-    <p>
-      <p>{props.parts[2].name} {props.parts[2].noExcercises}</p>
-    </p>
+      <Part name={props.parts[0].name} noExcercises={props.parts[0].noExcercises}/>
+      <Part name={props.parts[1].name} noExcercises={props.parts[1].noExcercises}/>
+      <Part name={props.parts[2].name} noExcercises={props.parts[2].noExcercises}/>
   </div>
   );
 };
 
 const Total = (props) => {
-  console.log(props)
   return (
     <p>Number of exercises: {props.exercises[0] + props.exercises[1] + props.exercises[2]}</p>
   )
