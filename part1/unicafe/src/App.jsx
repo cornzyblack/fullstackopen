@@ -35,6 +35,7 @@ const App = () => {
     return handler;
   };
 
+
   const total = feedbacks.good + feedbacks.neutral + feedbacks.bad;
   const average = (1 * feedbacks.good + 0 * feedbacks.neutral - (1 * feedbacks.bad)) / total;
   const positive = feedbacks.good / total;
