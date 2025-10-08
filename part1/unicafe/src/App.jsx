@@ -1,8 +1,23 @@
 import { useState } from 'react'
 
 const Header = ({text}) => <h1>{text}</h1>;
-const Summary = ({ text, total }) => <p>{text} {total}</p>;
+const Summary = ({ name, value }) => <p>{name} {value}</p>;
 const Button = ({ name, onClick }) => <button onClick={onClick}>{name}</button>;
+const Statistics = ({ goodTotal, neutralTotal, badTotal, average, positive }) => {
+  if (goodTotal === 0 & neutralTotal === 0 & badTotal === 0) {
+    return <div>No feedback given</div>
+  }
+  return (
+    <div>
+      <Summary name="good" value={goodTotal} />
+      <Summary name="neutral" value={neutralTotal} />
+      <Summary name="bad" value={badTotal} />
+      <Summary name="all" value={goodTotal + neutralTotal + badTotal} />
+      <Summary name="average" value={average} />
+      <Summary name="positive" value={positive + " % "} />
+    </div>
+  );
+}
 
 const App = () => {
   const [feedbacks, setFeedbacks] = useState({
@@ -10,7 +25,6 @@ const App = () => {
     neutral: 0,
     bad: 0
   })
-
 
   const setFeedback = (feedback) => {
     const handler = () => {
@@ -34,16 +48,11 @@ const App = () => {
         <Button name="good" onClick={setFeedback("good")} />
         <Button name="neutral" onClick={setFeedback("neutral")} />
         <Button name="bad" onClick={setFeedback("bad")} />
-    </div>
-        <div>
-        <Header text="statistics" />
-        <Summary text="good" total={feedbacks.good} />
-        <Summary text="neutral" total={feedbacks.neutral} />
-        <Summary text="bad" total={feedbacks.bad} />
-        <Summary text="all" total={feedbacks.good+ feedbacks.neutral + feedbacks.bad} />
-        <Summary text="average" total={average} />
-        <Summary text="positive" total={positive + " % "} />
+      </div>
 
+      <div>
+        <Header text="statistics" />
+        <Statistics goodTotal={feedbacks.good} badTotal={feedbacks.bad} neutralTotal={feedbacks.neutral} positive={positive} average={average}/>
       </div>
     </div>
   )
