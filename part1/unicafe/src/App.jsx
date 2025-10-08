@@ -1,23 +1,24 @@
 import { useState } from 'react'
 
 const Header = ({text}) => <h1>{text}</h1>;
-const Summary = ({ name, value }) => <p>{name} {value}</p>;
+const StatisticLine = ({ text, value }) => <p>{text} {value}</p>;
 const Button = ({ name, onClick }) => <button onClick={onClick}>{name}</button>;
+
 const Statistics = ({ goodTotal, neutralTotal, badTotal, average, positive }) => {
   if (goodTotal === 0 & neutralTotal === 0 & badTotal === 0) {
     return <div>No feedback given</div>
   }
   return (
     <div>
-      <Summary name="good" value={goodTotal} />
-      <Summary name="neutral" value={neutralTotal} />
-      <Summary name="bad" value={badTotal} />
-      <Summary name="all" value={goodTotal + neutralTotal + badTotal} />
-      <Summary name="average" value={average} />
-      <Summary name="positive" value={positive + " % "} />
+      <StatisticLine text="good" value={goodTotal} />
+      <StatisticLine text="neutral" value={neutralTotal} />
+      <StatisticLine text="bad" value={badTotal} />
+      <StatisticLine text="all" value={goodTotal + neutralTotal + badTotal} />
+      <StatisticLine text="average" value={average} />
+      <StatisticLine text="positive" value={positive + " % "} />
     </div>
   );
-}
+};
 
 const App = () => {
   const [feedbacks, setFeedbacks] = useState({
