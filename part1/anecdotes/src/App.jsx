@@ -1,5 +1,12 @@
 import { useState } from 'react'
 
+const AnecdoteBody = ({ text, noVotes }) => (
+  <div>
+    <p>{text}</p>
+    <p>has {noVotes} votes</p>
+  </div>
+);
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -13,20 +20,31 @@ const App = () => {
   ]
 
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState({0: 0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0})
 
   const getRandomInt = (max) => Math.floor(Math.random() * max);
 
   const getRandomAnecdote = () => {
-    console.log(anecdotes.length, getRandomInt(anecdotes.length));
     setSelected(getRandomInt(anecdotes.length));
+    console.log(selected, votes);
+  }
+  const updateVote = (selected) => {
+    const handler = () => {
+      const votesCopy = { ...votes };
+      const newVoteValue = votesCopy[selected] + 1;
+      setVotes({ ...votesCopy, [selected]: newVoteValue });
+      console.log(selected, newVoteValue, votesCopy);
+    };
+    return handler;
   }
 
   return (
     <div>
-      {anecdotes[selected]}
+      <AnecdoteBody text={anecdotes[selected]} noVotes={votes[selected]}/>
       <div><button onClick={getRandomAnecdote}>next anecdote</button></div>
+      <div><button onClick={updateVote(selected)}>vote</button></div>
     </div>
   )
 }
 
-export default App
+export default App;
