@@ -21,6 +21,10 @@ const App = () => {
     return handler;
   };
 
+  const total = feedbacks.good + feedbacks.neutral + feedbacks.bad;
+  const average = (1 * feedbacks.good + 0 * feedbacks.neutral - (1 * feedbacks.bad)) / total;
+  const positive = feedbacks.good / total;
+
   return (
     <div>
       <div>
@@ -36,6 +40,9 @@ const App = () => {
         <Summary text="good" total={feedbacks.good} />
         <Summary text="neutral" total={feedbacks.neutral} />
         <Summary text="bad" total={feedbacks.bad} />
+        <Summary text="all" total={feedbacks.good+ feedbacks.neutral + feedbacks.bad} />
+        <Summary text="average" total={average} />
+        <Summary text="positive" total={positive + " % "} />
 
       </div>
     </div>
