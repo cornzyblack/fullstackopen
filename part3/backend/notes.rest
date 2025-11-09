@@ -1,0 +1,12 @@
+
+GET http://localhost:3001/api/notes
+
+###
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+  "id": 4,
+  "content": "This is a test POST request made using the REST Client.",
+  "important": false
+}
