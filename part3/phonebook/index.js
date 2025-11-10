@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 
 const app = express();
+app.use(express.static("dist"));
 app.use(express.json());
 app.use(morgan((tokens, req, res) => {
     return [
@@ -40,8 +41,7 @@ let persons = [
 
 const generateId = () => {
     return Math.floor(Math.random() * 100000);
-}
-
+};
 
 app.get('/api/persons', (request, response) => {
     response.json(persons);
